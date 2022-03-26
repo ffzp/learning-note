@@ -15,17 +15,22 @@ for k=1:n-1
     change=z_mat(max2,:);
     z_mat(max2,:)=z_mat(k,:);
     z_mat(k,:)=change;
-    %使用guass消元法
     for j=k+1:n
         m=z_mat(j,k)/z_mat(k,k);
         z_mat(j,k:n+1)=z_mat(j,k:n+1)-m*z_mat(k,k:n+1);
+        z_mat(k,k:n+1)=z_mat(k,k:n+1)/z_mat(k,k);
     end
 end
+z_mat(n,n:n+1)=z_mat(n,n:n+1)/z_mat(n,n);
 B=z_mat(1:n,n+1);
 A=z_mat(1:n,1:n);
 x(n)=B(n)/A(n,n);
-for i=n-1:-1:1
-    x(i)=(B(i)-sum(A(i,i+1:n)*x(i+1:n)))/A(i+i);
+disp(B);
+disp(A);
+disp(x);
+for k=n-1:-1:1
+    x(k)=(B(k)-sum(A(k,k+1:n)*x(k+1:n)))/A(k,k);
 end
-
-
+disp(A);%U
+L=L0*A^-1;
+disp(L);%L
