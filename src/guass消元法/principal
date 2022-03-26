@@ -1,0 +1,31 @@
+function[x]=gauss_principal(A,B)
+L0=A;
+n=length(B);
+x=zeros(n,1);
+z_mat=[A,B];
+for k=1:n-1
+    max1=abs(A(k,k));
+    max2=k;
+    for j=k+1:n
+        if(abs(A(j,k))>max1)
+            max2=j;
+            max1=abs(A(j,k));
+        end
+    end
+    change=z_mat(max2,:);
+    z_mat(max2,:)=z_mat(k,:);
+    z_mat(k,:)=change;
+    %使用guass消元法
+    for j=k+1:n
+        m=z_mat(j,k)/z_mat(k,k);
+        z_mat(j,k:n+1)=z_mat(j,k:n+1)-m*z_mat(k,k:n+1);
+    end
+end
+B=z_mat(1:n,n+1);
+A=z_mat(1:n,1:n);
+x(n)=B(n)/A(n,n);
+for i=n-1:-1:1
+    x(i)=(B(i)-sum(A(i,i+1:n)*x(i+1:n)))/A(i+i);
+end
+
+
