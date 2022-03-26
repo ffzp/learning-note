@@ -1,7 +1,7 @@
 function[x]=gauss_normal(A,B)
 %仅用于解满秩矩阵的状况
-z_mat=[A,B];
 L0=A;
+z_mat=[A,B];
 n=length(B);
 rA=rank(A);
 rz=rank(z_mat);
@@ -19,8 +19,10 @@ if judge==0
          for j=i+1:n
              m=z_mat(j,i)/z_mat(i,i);
              z_mat(j,i:n+1)=z_mat(j,i:n+1)-m*z_mat(i,i:n+1);
+             z_mat(i,i:n+1)=z_mat(i,i:n+1)/z_mat(i,i);
          end
      end
+     z_mat(n,n:n+1)=z_mat(n,n:n+1)/z_mat(n,n);
      B=z_mat(1:n,n+1);
      A=z_mat(1:n,1:n);
      x(n)=B(n)/A(n,n);
@@ -28,4 +30,6 @@ if judge==0
          x(k)=(B(k)-sum(A(k,k+1:n)*x(k+1:n)))/A(k,k);
      end
 end
-
+disp(A);%U
+L=L0*A^-1;
+disp(L);%L
