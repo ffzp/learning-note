@@ -168,6 +168,8 @@ p=transl(Ts);
 plot(p(:,1),p(:,2))
 ```
 得到轨迹是一条直线
+  
 ![0_RA0_B3FXLQX__9T87_LX5.png](https://s2.loli.net/2022/04/04/TY1OJjVHZgXfvGe.png)
+  
 win！
 ## 高级问题
